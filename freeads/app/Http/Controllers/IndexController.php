@@ -9,4 +9,8 @@ class IndexController extends Controller
     public function showIndex() {
         return view("index");
     }
+
+    public function showProfile() {
+        echo "je suis dans profile";
+    }
 }

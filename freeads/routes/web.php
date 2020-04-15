@@ -2,16 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('index');
@@ -25,13 +15,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-
 Auth::routes(['verify' => true]);
 
-Route::get('profile', function () {
-    // Only verified users may enter...
-})->middleware('verified');
+Route::get('/profile/{id}', "ProfileController@show")->name("profile.show");
+
+Route::get('/edit/{id}', "ProfileController@edit")->name("edit.profile");
+Route::post('/edit/{id}', "ProfileController@update")->name("update.profile");
+
+// Route::get('/profile', "IndexController@showProfile");
