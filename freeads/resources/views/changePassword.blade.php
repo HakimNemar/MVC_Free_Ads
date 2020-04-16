@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Edit') }}</div>
+                <div class="card-header">{{ __('Change Password') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('update.profile', $user->id) }}">
+                    <form method="POST" action="{{ route('change.password', $user->id) }}">
                         @csrf
 
                         @if(session('success'))
@@ -18,32 +18,18 @@
                         @endif
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Current-Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" value="{{ $user->name }}" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input id="current-password" type="password" class="form-control" name="current-password" autocomplete="new-password">
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" value="{{ $user->email }}" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                        @if(session('warning'))
+                            <div class="alert alert-warning" role="alert">    
+                                {{session('warning')}}
                             </div>
-                        </div>
+                        @endif
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
@@ -63,7 +49,12 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
+                                <input id="password-confirm" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation" autocomplete="new-password">
+
+                                @if(session('warningnew'))
+                                    <strong><font color="red">{{session('warningnew')}}</font></strong>
+                                @endif
+
                             </div>
                         </div>
 
@@ -72,7 +63,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Update') }}
                                 </button>
-                                <a href="{{ route('show.password', $user->id) }}">{{ __('Change Password') }}</a>
                             </div>
                         </div>
                     </form>
