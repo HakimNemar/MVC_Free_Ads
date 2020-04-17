@@ -5,6 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                <a href="{{ route('annonces') }}"><div class="card-header">Annonces</div></a>
                 <a href="{{ route('edit.profile', $auth->id) }}"><div class="card-header">Edit Profile</div></a>
                 <div class="card-header">Dashboard Users</div>
                 <div class="card-body">
