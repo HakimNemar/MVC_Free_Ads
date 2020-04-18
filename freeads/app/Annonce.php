@@ -30,4 +30,9 @@ class Annonce extends Model
         $user = DB::table('annonces')->where('editor_id', $id)->get();
         return $user;
     }
+
+    public function deleteAn($id)
+    {
+        DB::table('annonces')->where('id', $id)->delete();
+    }
 }

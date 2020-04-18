@@ -55,7 +55,12 @@ class ProfileController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view("edit", compact("user"));
+        $auth = Auth::user();
+        if ($auth) {
+            return view("edit", compact("user"));
+        } else {
+            abort(404);
+        }
     }
 
     public function update(Request $request, $id)
@@ -94,7 +99,13 @@ class ProfileController extends Controller
     public function showPassword($id) 
     {
         $user = User::find($id);
-        return view("changePassword", compact("user"));
+        $auth = Auth::user();
+
+        if ($auth) {
+            return view("changePassword", compact("user"));
+        } else {
+            abort(404);
+        }
     }
 
     public function changePassword(Request $request, $id) 

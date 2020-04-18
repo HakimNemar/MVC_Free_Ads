@@ -32,3 +32,5 @@ Route::get('/myAnnonces/{id}', "AnnonceController@myAnnonces")->name("my.Annonce
 
 Route::get("/editAnnonce/{id}", "AnnonceController@editAnnonce")->name("edit.Annonce");
 Route::post("/editAnnonce/{id}", "AnnonceController@saveEdit")->name("save.edit");
+
+Route::get("/deleteAnnonce/{id}", "AnnonceController@deleteAnnonce")->name("delete.Annonce");

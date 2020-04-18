@@ -5,6 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                <div class="card-header"><a href="{{ route('my.Annonces', $annonce->editor_id)}}">See My Annonces</a></div>
                 <div class="card-header">{{ __('Edit Annonce') }}</div>
 
                 <div class="card-body">
@@ -73,11 +74,11 @@
                                     {{ __('Edit') }}
                                 </button>
                             </div>
-                            <a href="">
-                                <button class="btn btn-danger">{{ __('Delete') }}</button>
-                            </a>
                         </div>
                     </form>
+                    <a href="{{ route('delete.Annonce', $annonce->id) }}">
+                        <button class="btn btn-danger">{{ __('Delete') }}</button>
+                    </a>
                 </div>
             </div>
         </div>

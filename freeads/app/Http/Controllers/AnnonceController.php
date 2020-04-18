@@ -18,19 +18,32 @@ class AnnonceController extends Controller
     {
         $auth = Auth::user();
         $annonces = $this->req->read_all();
-        return view("Allannonces", compact("annonces", "auth"));
+        if ($auth) {
+            return view("Allannonces", compact("annonces", "auth"));
+        } else {
+            abort(404);
+        }
     }
 
     public function annonce($id)
     {
         $auth = Auth::user();
         $annonce = $this->req->read($id);
-        return view("annonce", compact("annonce", "auth"));
+        if ($auth) {
+            return view("annonce", compact("annonce", "auth"));
+        } else {
+            abort(404);
+        }
     }
 
     public function createAnnonce() 
     { 
-        return view("createAnnonce");
+        $auth = Auth::user();
+        if ($auth) {
+            return view("createAnnonce");
+        } else {
+            abort(404);
+        }
     }
 
     public function saveAnnonce(Request $request)
@@ -59,14 +72,26 @@ class AnnonceController extends Controller
 
     public function myAnnonces($id) 
     {
+        $auth = Auth::user();
         $annonces = $this->req->readMyAnnonces($id);
-        return view("myAnnonces",compact("annonces"));
+
+        if ($auth) {
+            return view("myAnnonces",compact("annonces"));
+        } else {
+            abort(404);
+        }
     }
 
     public function editAnnonce($id)
     {
+        $auth = Auth::user();
         $annonce = $this->req->read($id);
-        return view("editAnnonce", compact("annonce"));
+
+        if ($auth) {
+            return view("editAnnonce", compact("annonce"));
+        } else {
+            abort(404);
+        }
     }
 
     public function saveEdit($id, Request $request)
@@ -90,6 +115,18 @@ class AnnonceController extends Controller
 
             $request->session()->flash('success', 'Your annonce is updated !');
             return redirect()->route('edit.Annonce', $id);
+        }
+    }
+
+    public function deleteAnnonce($id)
+    {
+        $auth = Auth::user();
+
+        if ($auth) {
+            $this->req->deleteAn($id);
+            return redirect()->route('annonces');
+        } else {
+            abort(404);
         }
     }
 }
