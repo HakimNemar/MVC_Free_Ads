@@ -7,5 +7,6 @@
 </head>
 <body>
     <h1>Index</h1>
+    <h1>Go <a href="/home">Home</a></h1>
 </body>
 </html>
